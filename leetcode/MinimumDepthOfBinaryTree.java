@@ -19,6 +19,7 @@ class Solution {
             return minDepth1(node.left) + 1;
         return Math.min(minDepth1(node.left), minDepth1(node.right)) + 1;
     }
+    
     public int minDepth(TreeNode root) {
         return minDepth1(root);
     }
