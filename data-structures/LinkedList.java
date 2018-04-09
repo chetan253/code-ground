@@ -41,7 +41,40 @@ class LinkedList{
 		head = newNode;
 		return;
 	}
+
+	//Pop head	
+	static int pop_front(){
+		Node n = head;
+		head = n.next;
+		return n.data;
+	}
+
+	//Pop tail
+	static int pop_back(){
+		Node node = head;
+		Node prev = null;
+		while(node.next != null){
+			prev = node;
+			node = node.next;
+		}
+		prev.next = null;
+		return node.data;
+	}
+
+	//Check if linkedlist is empty or not
+	static boolean empty(){
+		if(head == null)
+			return true;
+		return false;
+	}
 	
+	//Get front value
+	static int front(){
+		if(head == null)
+			System.out.println("List is Empty");
+		return head.data;
+	}
+
 	static void delete(int data){
 		if(head.data == data){
 			head = head.next;
