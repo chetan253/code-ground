@@ -1,32 +1,32 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        HashMap<Character, Integer> mapper =  new HashMap<Character, Integer>();
-        int len = 1, maxlen = 0, startpos = 0, ctr = 0;
-        if(s.length() == 0 || s.length() == 1)
+        int i = 0, j = 0, maxLen = 0;
+        
+        if(s.length() <= 1){
             return s.length();
-        char[] arr = s.toCharArray();
-        mapper.put(arr[0], 0);
-        for(int i = 1; i < arr.length; i++){
-           if(mapper.containsKey(arr[i])){                
-                if(arr[i] == arr[i-1]){
-                    mapper.clear();
-                    mapper.put(arr[i], i);
-                    len = 1;
-                    startpos = i;
-                }
-                else{
-                    startpos = mapper.get(arr[i]) >= startpos ? mapper.get(arr[i]) + 1: startpos;
-                    len = mapper.get(arr[i]) >= startpos ? Math.abs(i - startpos): Math.abs(i - startpos)+1;
-                    mapper.put(arr[i], i);
-                }
-            }
-            else{
-                mapper.put(arr[i],i);
-                len++;
-            }
-            if(len > maxlen)
-                maxlen = len;
         }
-        return maxlen;
+        
+        char[] ch = s.toCharArray();
+        
+        HashMap<Character, Integer> idxMap = new HashMap<Character, Integer>();
+        while(j < ch.length && !idxMap.containsKey(ch[j])){
+            idxMap.put(ch[j], j);
+            maxLen = Math.max(maxLen, j - i + 1);
+            j++;
+        }
+        
+        while(j < ch.length){
+            if(idxMap.containsKey(ch[j])){
+                int lastIdx = idxMap.get(ch[j]);
+                while(i <= lastIdx){
+                    idxMap.remove(ch[i]);
+                    i++;
+                }
+            }
+            idxMap.put(ch[j], j);
+            maxLen = Math.max(maxLen, j - i + 1);
+            j++;
+        }
+        return maxLen;
     }
 }
