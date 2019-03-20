@@ -7,23 +7,22 @@
  * }
  */
 class Solution {
-    int d = 0;
-    public ListNode printList(ListNode node, int n){
-        if(node == null){
-            return null;
-        }
-        printList(node.next, n);
-        d--;
-        if(d == -1){
-            node.next = node.next.next;
-        }
-        return null;
-    }
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        d = n;
-        ListNode h = new ListNode(0);
-        h.next = head;
-        printList(h, n);
-        return h.next;
+        ListNode temp = new ListNode(-1);
+        temp.next = head;
+        remove(temp, n);
+        return temp.next;
+    }
+    
+    public int remove(ListNode node, int n) {
+        if(node == null){
+            return 0;
+        }
+        ListNode temp = node;
+        int k = remove(node.next, n) + 1;
+        if(k-1 == n && temp.next != null){
+            temp.next = temp.next.next;
+        }
+        return k;
     }
 }
