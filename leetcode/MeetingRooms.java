@@ -1,6 +1,5 @@
-// Verified on LintCode
 public class Solution {
-    public boolean canAttendMeetings(List<Interval> intervals) {
+    public boolean canAttendMeetings(Interval[] intervals) {
         int prev = 0;
         int max = -1;
         for(Interval interval : intervals) {
@@ -20,6 +19,7 @@ public class Solution {
             if(prev > 1)
                 return false;
         }
-        return true;    
+        return true;
     }
 }
+
