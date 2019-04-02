@@ -1,18 +1,15 @@
-// Verified from LintCode
 public class Solution {
-    /**
-     * @param intervals: an array of meeting time intervals
-     * @return: the minimum number of conference rooms required
-     */
-    public int minMeetingRooms(List<Interval> intervals) {
-        // Write your code here
+    public int minMeetingRooms(Interval[] intervals) {
         int ctr = 0;
         int max = -1;
+        if(intervals.length == 0){
+            return 0;
+        }
+        
         for(Interval interval : intervals) {
             max = Math.max(max, interval.end);
         }
 
-        System.out.println("Max time is : "+  max);
         int[] arr = new int[max+1];
         for(Interval interval : intervals) {
             int startTime = interval.start;
